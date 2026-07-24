@@ -5,6 +5,7 @@
 #include "CoreMinimal.h"
 #include "GameFramework/Character.h"
 #include "Logging/LogMacros.h"
+#include "AbilitySystemInterface.h"
 #include "VoidKillaCharacter.generated.h"
 
 class USpringArmComponent;
@@ -13,10 +14,13 @@ class UInputMappingContext;
 class UInputAction;
 struct FInputActionValue;
 
+class UAbilitySystemComponent;
+class UVoidBaseAttributeSet;
+
 DECLARE_LOG_CATEGORY_EXTERN(LogTemplateCharacter, Log, All);
 
 UCLASS(config=Game)
-class AVoidKillaCharacter : public ACharacter
+class AVoidKillaCharacter : public ACharacter, public IAbilitySystemInterface
 {
 	GENERATED_BODY()
 
@@ -47,6 +51,10 @@ class AVoidKillaCharacter : public ACharacter
 public:
 	AVoidKillaCharacter();
 	
+	virtual UAbilitySystemComponent* GetAbilitySystemComponent() const override
+	{
+		return AbilitySystemComponent;
+	}
 
 protected:
 
@@ -68,5 +76,13 @@ public:
 	FORCEINLINE class USpringArmComponent* GetCameraBoom() const { return CameraBoom; }
 	/** Returns FollowCamera subobject **/
 	FORCEINLINE class UCameraComponent* GetFollowCamera() const { return FollowCamera; }
+
+protected:
+
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Abilities")
+	TObjectPtr<UAbilitySystemComponent> AbilitySystemComponent;
+
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Abilities")
+	TObjectPtr<UVoidBaseAttributeSet> AttributeSetBase;
 };
 
