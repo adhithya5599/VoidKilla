@@ -16,6 +16,7 @@ struct FInputActionValue;
 
 class UAbilitySystemComponent;
 class UVoidBaseAttributeSet;
+class UGameplayAbility;
 
 DECLARE_LOG_CATEGORY_EXTERN(LogTemplateCharacter, Log, All);
 
@@ -56,6 +57,9 @@ public:
 		return AbilitySystemComponent;
 	}
 
+	virtual void PossessedBy(AController* NewController) override;
+	virtual void OnRep_PlayerState() override;
+
 protected:
 
 	/** Called for movement input */
@@ -84,5 +88,8 @@ protected:
 
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Abilities")
 	TObjectPtr<UVoidBaseAttributeSet> AttributeSetBase;
+
+	UPROPERTY(EditDefaultsOnly, Category = "Abilities")
+	TArray<TSubclassOf<UGameplayAbility>> DefaultAbilities;
 };
 
