@@ -14,6 +14,7 @@
 #include "AbilitySystemComponent.h"
 #include "Gas/Attribute/VoidBaseAttributeSet.h"
 #include "Abilities/GameplayAbility.h"
+#include "Components/PostProcessComponent.h"
 
 DEFINE_LOG_CATEGORY(LogTemplateCharacter);
 
@@ -63,6 +64,9 @@ AVoidKillaCharacter::AVoidKillaCharacter()
 
 	AttributeSetBase = CreateDefaultSubobject<UVoidBaseAttributeSet>
 		(TEXT("AttributeSetBase"));
+
+	PostProcessComponent = CreateDefaultSubobject<UPostProcessComponent>
+		(TEXT("PostProcessComponent"));
 }
 
 //////////////////////////////////////////////////////////////////////////

@@ -17,6 +17,7 @@ struct FInputActionValue;
 class UAbilitySystemComponent;
 class UVoidBaseAttributeSet;
 class UGameplayAbility;
+class UPostProcessComponent;
 
 DECLARE_LOG_CATEGORY_EXTERN(LogTemplateCharacter, Log, All);
 
@@ -91,5 +92,8 @@ protected:
 
 	UPROPERTY(EditDefaultsOnly, Category = "Abilities")
 	TArray<TSubclassOf<UGameplayAbility>> DefaultAbilities;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "PostProcess")
+	TObjectPtr<UPostProcessComponent> PostProcessComponent;
 };
 
